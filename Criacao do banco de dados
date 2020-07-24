@@ -1,0 +1,50 @@
+CREATE TABLE usuario (
+    id INT NOT NULL AUTO_INCREMENT,
+    nome varchar(255) NOT NULL,
+    email varchar(255) NOT NULL,
+    data_aniversario datetime(6) NOT NULL,
+    endereco varchar(255) DEFAULT NULL,
+    data_criacao datetime(6) DEFAULT NULL,
+    data_modificacao datetime(6) DEFAULT NULL,
+    PRIMARY KEY (id)
+) ;
+
+	INSERT INTO usuario
+	(nome, email, data_aniversario, endereco, data_criacao)
+	VALUES('fabio aoki', 'fabio.aoki@aoki.com', '1993-09-11', 'rua teste', '2020-07-20');
+	
+	INSERT INTO usuario
+	(nome, email, data_aniversario, endereco, data_criacao, data_modificacao)
+	VALUES('lais aoki', 'lais.aoki@aoki.com', '1990-01-01', 'rua lais', '2020-07-20', '2020-07-24');
+
+	INSERT INTO usuario
+	(nome, email, data_aniversario)
+	VALUES('joao aoki', 'joao.aoki@aoki.com', '1961-01-01');
+
+
+CREATE TABLE lista_contato (
+    id INT NOT NULL AUTO_INCREMENT,
+    id_usuario INT,
+    tipo varchar(255) DEFAULT NULL,
+    detalhe varchar(255) DEFAULT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_usuario)
+        REFERENCES usuario(id)
+);
+
+
+	INSERT INTO lista_contato
+	(id_usuario, tipo, detalhe)
+	VALUES(1, 'telefone', '11 91234-5678');
+
+	INSERT INTO lista_contato
+	(id_usuario, tipo, detalhe)
+	VALUES(2, 'endereco residencial', 'rua maria 100');
+
+	INSERT INTO lista_contato
+	(id_usuario, tipo, detalhe)
+	VALUES(3, 'email', 'maria.lurdes@aoki.com');
+
+
+
+
