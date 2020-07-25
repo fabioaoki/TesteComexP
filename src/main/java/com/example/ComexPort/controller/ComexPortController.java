@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.ComexPort.dto.IdadeDto;
 import com.example.ComexPort.dto.UsuarioDto;
 import com.example.ComexPort.responses.Response;
 import com.example.ComexPort.service.ListaContatoService;
@@ -106,5 +105,4 @@ public class ComexPortController {
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
-
 }
