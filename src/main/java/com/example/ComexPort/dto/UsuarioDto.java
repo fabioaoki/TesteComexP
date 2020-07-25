@@ -5,8 +5,11 @@ import java.util.Date;
 
 import javax.persistence.PrePersist;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.Length;
+
+import com.sun.istack.NotNull;
 
 import lombok.Builder;
 import lombok.Data;
@@ -26,13 +29,15 @@ public class UsuarioDto implements Serializable {
 	@NotEmpty(message = "Email nao pode ser vazio.")
 	private String email;
 	
-	//trocar para String dataNascimento
-	@NotEmpty(message = "data de nascimento nao pode ser vazio")
-	private String dataAniversario;
+	@NotNull
+	@Past
+	private Date dataAniversario;
 	
 	private String endereco;
 	private Date dataCriacao;
 	private Date dataModificacao;
+	
+	private int idade;
 
 	@PrePersist
     public UsuarioDto prePersist(UsuarioDto usuarioDto) {
