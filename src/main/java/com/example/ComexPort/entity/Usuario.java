@@ -22,7 +22,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name="usuario")
+@Table(name="heroku_14a1a4c46227a3a.usuario")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Usuario implements Serializable{
