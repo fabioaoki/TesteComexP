@@ -11,11 +11,13 @@ import org.hibernate.validator.constraints.Length;
 
 import com.sun.istack.NotNull;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
+@AllArgsConstructor
 public class UsuarioDto implements Serializable {
 	
 	private static final long serialVersionUID = -6978454629460201327L;
@@ -51,4 +53,15 @@ public class UsuarioDto implements Serializable {
         }
     }
 
+	@Override
+	public String toString() {
+		return "UsuarioDto [id=" + id + ", nome=" + nome + ", email=" + email + ", dataAniversario=" + dataAniversario
+				+ ", endereco=" + endereco + ", dataCriacao=" + dataCriacao + ", dataModificacao=" + dataModificacao
+				+ ", idade=" + idade + "]";
+	}
+
+	public UsuarioDto() {
+	}
+
+	
 }

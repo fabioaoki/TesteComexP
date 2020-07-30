@@ -47,7 +47,7 @@ public class ComexPortController {
 	}
 
 	@RequestMapping(value = "/comexPort/{email}", method = RequestMethod.GET)
-	public ResponseEntity<UsuarioDto> busca(@PathVariable(value = "email") String email) {
+	public ResponseEntity<UsuarioDto> busca(@PathVariable(value = "email") String email) throws Exception {
 		UsuarioDto usuarioDto = usuarioService.verificar(email);
 		if (Objects.nonNull(usuarioDto)) {
 			return new ResponseEntity<UsuarioDto>(usuarioDto, HttpStatus.OK);
