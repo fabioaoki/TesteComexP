@@ -1,6 +1,7 @@
 package com.example.ComexPort.service;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,25 +37,36 @@ public class UsuarioService {
 	}
 
 	public UsuarioDto verificar(String email) throws Exception {
-		try {
-			ArrayList<Usuario> usuario = usuarioRepository.findByEmail(email);
+		ArrayList<Usuario> usuario = usuarioRepository.findByEmail(email);
+		if (Objects.nonNull(usuario)) {
 			for (int i = 0; i < usuario.size();) {
 				Usuario dto = usuario.get(i);
 				return UsuarioDto.builder().id(dto.getId()).nome(dto.getNome())
 						.dataAniversario(dto.getDataAniversario()).endereco(dto.getEndereco())
 						.dataCriacao(dto.getDataCriacao()).dataModificacao(dto.getDataModificacao()).build();
-		}
-			} catch (Exception e) {
-			throw new Exception("email nao encontrado");
+			}
 		}
 		throw new Exception("email nao encontrado");
 	}
 
+//	try {
+//		ArrayList<Usuario> usuario = usuarioRepository.findByEmail(email);
+//		for (int i = 0; i < usuario.size();) {
+//			Usuario dto = usuario.get(i);
+//			return UsuarioDto.builder().id(dto.getId()).nome(dto.getNome())
+//					.dataAniversario(dto.getDataAniversario()).endereco(dto.getEndereco())
+//					.dataCriacao(dto.getDataCriacao()).dataModificacao(dto.getDataModificacao()).build();
+//	}
+//		} catch (Exception e) {
+//		throw new Exception("email nao encontrado");
+//	}
+//	throw new Exception("email nao encontrado");
 	public UsuarioDto atualiza(UsuarioDto usuarioDto) throws Exception {
 		verificaEmail(usuarioDto);
 		usuarioDto.prePersist(usuarioDto);
-		Usuario usuario = Usuario.builder().id(usuarioDto.getId()).nome(usuarioDto.getNome()).email(usuarioDto.getEmail())
-				.dataAniversario(usuarioDto.getDataAniversario()).dataCriacao(usuarioDto.getDataCriacao()).endereco(usuarioDto.getEndereco())
+		Usuario usuario = Usuario.builder().id(usuarioDto.getId()).nome(usuarioDto.getNome())
+				.email(usuarioDto.getEmail()).dataAniversario(usuarioDto.getDataAniversario())
+				.dataCriacao(usuarioDto.getDataCriacao()).endereco(usuarioDto.getEndereco())
 				.dataModificacao(usuarioDto.getDataModificacao()).build();
 		usuarioRepository.save(usuario);
 		return usuarioDto;

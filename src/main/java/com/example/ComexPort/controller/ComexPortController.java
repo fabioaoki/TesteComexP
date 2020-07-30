@@ -96,13 +96,13 @@ public class ComexPortController {
 
 	@RequestMapping(value = "/comexPortIdade/{email}", method = RequestMethod.GET)
 	public ResponseEntity<UsuarioDto> idade(@PathVariable(value = "email") String email) throws Exception {
-		UsuarioDto usuarioDto = usuarioService.verificar(email);
-		if (Objects.nonNull(usuarioDto)) {
+		if (Objects.nonNull(email)) {
+			UsuarioDto usuarioDto = usuarioService.verificar(email);
 			Date atual = new Date();
 			int i = atual.getYear() - usuarioDto.getDataAniversario().getYear();
 			usuarioDto.setIdade(i);
 			return new ResponseEntity<UsuarioDto>(usuarioDto, HttpStatus.OK);
 		}
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 }

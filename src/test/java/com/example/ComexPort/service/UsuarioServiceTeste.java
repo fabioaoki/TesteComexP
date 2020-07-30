@@ -1,5 +1,6 @@
 package com.example.ComexPort.service;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 
@@ -48,7 +49,7 @@ public class UsuarioServiceTeste {
 	}
 	
 	@Test
-	public void testeCadastrarCamposObrigatoriosNulos() throws Exception {
+	public void testeCadastrarCamposObrigatoriosNulos() {
 		//cenario
 		UsuarioDto usuarioDto = new UsuarioDto();
 		//acao
@@ -58,21 +59,22 @@ public class UsuarioServiceTeste {
 	}
 	
 		
-	@Test
+	@Test(expected = Exception.class)
 	public void verificarEmailNaoExistenteNaBaseDeDados() throws Exception {
 		//cenario
 		UsuarioDto usuarioDto = new UsuarioDto();
 		usuarioDto.setEmail("fabio@aoki.com");
 		//acao
-		Assert.assertEquals("email existente",null,usuarioService.verificar(usuarioDto.getEmail()));
+		//Assert.assertEquals("email existente",null,usuarioService.verificar(usuarioDto.getEmail()));
+		error.checkThat(usuarioService.verificar(usuarioDto.getEmail()), is(nullValue()));
 	}
-	
-	@Test
+	//PRECISO MELHORAR
+	@Test(expected = Exception.class)
 	public void verificarEmailExistenteNaBaseDeDados() throws Exception {
 		//cenario
 		UsuarioDto usuarioDto = new UsuarioDto();
 		usuarioDto.setEmail("fabio@aoki.com");
 		//acao
-		Assert.assertNotEquals("email nao existente","fabio@aoki.com",usuarioService.verificar(usuarioDto.getEmail()));
+		Assert.assertEquals("fabio@aoki.com",usuarioService.verificar(usuarioDto.getEmail()));
 	}
 }
